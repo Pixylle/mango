@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Categories{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<section id="section1" data-speed="8" data-type="background" class="Catégorie parallax p-2">
+    <div class="">
+        <div class="row justify-content-center mb-4 title">
+            <div class="col-12 d-flex align-items-center justify-content-center">
+                <span class="decorative-element me-2"></span>
+                <h3 class="category-title">Catégories</h3>
+                <span class="decorative-element ms-2"></span>
+            </div>
+        </div>  
+        <div class="container justify-content-center mb-3">
+            {% if categories is not empty %}
+                {% for categorie in categories %}
+                    <div class="col-3 cath">
+                    
+                            <p class="category-name">{{ categorie.libelle }}</p>
+                            <img src="{{ asset('build/images/' ~ categorie.image) }}" alt="{{ categorie.libelle }}" class="category-image">
+                        </a>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Категории не найдены</p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+{% endblock %}

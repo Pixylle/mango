@@ -1,0 +1,106 @@
+{% extends 'home.html.twig' %}
+
+{% block title %}
+    Главная страница
+{% endblock %}
+
+{% block body %}
+    <header>
+        <div class="overlay">    
+        <video playsinline autoplay="autoplay" muted="muted" loop="loop">
+          <source src="{{ asset('build/images/Video4.mp4') }}" type="video/mp4">
+        </video>
+        </div>      
+        <div class="">
+        
+          <div class="cont d-flex h-100 text-center align-items-center">
+            <div class="w-100 text-white">
+                <div class="adress d-flex justify-content-between">
+                    <div class="">+4733378901  Email: food@restan.com</div>
+                    <div>175 10h Street, Office 375 Berlin, De 21562</div>
+                </div>
+                <nav class="navbar navbar-expand-lg navbar-dark">
+                    <div class="container-fluid">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="#">HOME</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{{ path('app_plats') }}">TOUS LES PLATS</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="{{ path('app_categories') }}">CATéGORIES</a>
+                                </li>
+                            </ul>
+                            
+                        </div>
+                        <form class="d-flex">
+                                <input class="form-control me-2" type="search" placeholder="Recherche" aria-label="Recherche">
+                                <button class="btn btn-outline-success " type="submit">
+                                    Rechercher</button>
+                            </form>
+                    </div>
+                </nav>
+                
+                <div id="content">
+                <div id="logo" class="d-flex">
+                    <img src="{{ asset('build/images/logonoir-removebg-preview.png') }}" alt="Logo">
+                </div>
+                <div class="promo-text">
+                    <h2>Découvrez <span style="color: #50bda5;">Gourmango</span></h2>
+                    <p>Savourez des moments délicieux</p> 
+                </div>
+                <div class="iconplat d-none d-md-block"><img src="{{ asset('build/images/clean_logo.png') }}" alt="clean_logo.png"></div>
+            </div>
+            </div>
+          </div>
+        </div>
+    </header>
+    
+    
+<section id="section1" data-speed="8" data-type="background" class="Catégorie parallax p-2">
+    <div class="row">
+        <!-- Заголовок секции -->
+        <div class="row justify-content-center mb-4 title">
+            <div class="d-flex align-items-center justify-content-center">
+                <span class="decorative-element me-2"></span>
+                <h3 class="category-title">Catégories</h3>
+                <span class="decorative-element ms-2"></span>
+            </div>
+        </div>
+
+        <!-- Карточки категорий -->
+        <div class="row col-8 mx-auto justify-content-center">
+            {% if activecategories is not empty %}
+                {% for activecat in activecategories %}
+                    <div class="col-4 d-flex">
+                        <!-- Карточка занимает 1/4 ширины -->
+                        <div class="card flex-grow-1">
+                            <!-- Карточка растягивается на всё доступное пространство -->
+                            <img src="{{ asset('build/images/' ~ activecat.image) }}" 
+                                 alt="{{ activecat.libelle }}" 
+                                 class="card-img-top category-image">
+                            <div class="card-body text-center">
+                                <p class="category-name">{{ activecat.libelle }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Категории не найдены</p>
+            {% endif %}
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+{% endblock %}

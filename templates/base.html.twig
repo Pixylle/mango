@@ -1,17 +1,80 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
-        {% block stylesheets %}
-        {% endblock %}
-
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title %}Gourmango{% endblock %}</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+              rel="stylesheet" 
+              integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" 
+              crossorigin="anonymous">
+       <link rel="stylesheet" href="/build/app.css">
+       <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+        {% block stylesheets %}{% endblock %}
+            {{ encore_entry_link_tags('app') }}
+<section id="promocat">
+        <div class="adress d-flex justify-content-between">
+            <div>+4733378901  Email: food@restan.com</div>
+            <div>175 10h Street, Office 375 Berlin, De 21562</div>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-dark">
+            <div class="container-fluid">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="/index.php">HOME</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="plats.php">TOUS LES PLATS</a>
+                        </li>
+                        <li class="nav-item">
+                                    <a class="nav-link" aria-current="page" href="categories.php">CATéGORIES</a>
+                                </li>
+                                
+                    </ul>
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Recherche" aria-label="Recherche">
+                        <button class="btn btn-outline-success " type="submit">
+                            Rechercher</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        
+        <div id="content">
+        <div id="logo" class="d-flex">
+            <img src="{{ asset('build/images/logonoir-removebg-preview.png') }}">
+        </div>
+    </section>
     </head>
-    <body>
+
         {% block body %}{% endblock %}
+<div class="floating-cart">
+  <a href="contact.php" class="cart-link">
+    <i class="fas fa-shopping-cart"></i>
+    
+  </a>
+</div>
+
+<section class="foot">
+        <div class="d-flex justify-content-center">
+          <div><p>Politique de confidentialité</p></div>
+          <div><img src="{{ asset('build/images/fb.png') }}"></div>
+          <div><img src="{{ asset('build/images/instagram.png') }}"></div>
+          <div><img src="{{ asset('build/images/telegram.png') }}"></div>
+          <div><img src="{{ asset('build/images/whatsapp.png') }}"></div>
+          <div><img src="{{ asset('build/images/pinterest.png') }}"></div>
+          <div><p>Mentions légales</p></div>
+        </div>
+        </section>
+    <script src="/build/app.js"></script>
+        <script src="{{ asset('build/runtime.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+       
+        {% block javascripts %}{% endblock %}
+            {{ encore_entry_script_tags('app') }}
     </body>
 </html>
