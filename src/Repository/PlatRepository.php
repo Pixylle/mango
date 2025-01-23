@@ -15,15 +15,17 @@ class PlatRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Plat::class);
     }
-    public function findByCategorieId($categorieId)
+
+    public function findByCategorieId(int $categorieId): array
     {
         return $this->createQueryBuilder('p')
-            ->innerJoin('p.categorie', 'c')
-            ->where('c.id = :categorieId')
-            ->setParameter('categorieId', $categorieId)
-            ->getQuery()
-            ->getResult();
+            ->innerJoin('p.categorie', 'c') // Соединяем с сущностью Categorie
+            ->where('c.id = :categorieId') // Фильтруем по ID категории
+            ->setParameter('categorieId', $categorieId) // Передаем параметр
+            ->getQuery() // Формируем запрос
+            ->getResult(); // Выполняем запрос и возвращаем результат
     }
+}
 
     //    /**
     //     * @return Plat[] Returns an array of Plat objects
@@ -49,4 +51,4 @@ class PlatRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
-}
+

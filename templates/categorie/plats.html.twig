@@ -3,29 +3,33 @@
 {% block body %}
    <section class="menu-section">
     <div class="menu-container">
-        {% for plat in plats %}
-        <div class="custom-card">
-            <form method="POST" action="addcard.php" class="custom-card">
-                <img src="{{ asset('build/images/' ~ plat.image) }}" class="custom-card-img">
-                <h5 class="custom-card-title">{{ plat.title }}</h5>
-                <p class="custom-card-description">{{ plat.description }}</p>
-                <p class="custom-card-price">{{ plat.prix }} €</p>
-                <div class="custom-card-footer">
-                    <input type="number" name="quantite" min="1" value="1" class="custom-card-quantity">
-                    <input type="hidden" name="id" value="{{ plat.id }}">
-                    <input type="hidden" name="title" value="{{ plat.title }}">
-                    <input type="hidden" name="prix" value="{{ plat.prix }}">
-                    <input type="hidden" name="id_categorie" value="{{ plat.categorie.id }}">
-                    <input type="hidden" name="image" value="{{ plat.image }}">
-                    <button type="submit" name="action" value="buy_now" class="custom-card-btn">
-                        <i class="fa fa-shopping-cart"></i> Acheter
-                    </button>
+        {% if plats is not empty %}
+            {% for plat in plats %}
+                <div class="custom-card">
+                    <form method="POST" action="addcard.php" class="custom-card">
+                        <img src="{{ asset('build/images/' ~ plat.image) }}" class="custom-card-img">
+                        <h5 class="custom-card-title">{{ plat.title }}</h5>
+                        <p class="custom-card-description">{{ plat.description }}</p>
+                        <p class="custom-card-price">{{ plat.prix }} €</p>
+                        <div class="custom-card-footer">
+                            <input type="number" name="quantite" min="1" value="1" class="custom-card-quantity">
+                            <input type="hidden" name="id" value="{{ plat.id }}">
+                            <input type="hidden" name="title" value="{{ plat.title }}">
+                            <input type="hidden" name="prix" value="{{ plat.prix }}">
+                            <input type="hidden" name="id_categorie" value="{{ plat.categorie.id }}">
+                            <input type="hidden" name="image" value="{{ plat.image }}">
+                            <button type="submit" name="action" value="buy_now" class="custom-card-btn">
+                                <i class="fa fa-shopping-cart"></i> Acheter
+                            </button>
+                        </div>
+                    </form>
                 </div>
-            </form>
-        </div>
-        {% endfor %}
+            {% endfor %}
+        {% else %}
+            <p>Désolé, il n'y a pas encore de plats dans cette catégorie.</p>
+            <img src="{{ asset('build/images/faim.png') }}" alt="Pas de plats" class="message-image">
+        {% endif %}
+        
     </div>
 </section>
-
-
 {% endblock %}

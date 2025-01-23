@@ -22,7 +22,7 @@ Encore
     // Включаем карты кода для разработки
     .enableSourceMaps(!Encore.isProduction())
     // Включаем версии файлов для production-сборок
-    .enableVersioning(Encore.isProduction());
+
 
 // Экспортируем конфигурацию
 module.exports = Encore.getWebpackConfig();

@@ -25,13 +25,13 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="/index.php">HOME</a>
+                            <a class="nav-link active" aria-current="page" href="{{ path('app_accueil') }}">HOME</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="plats.php">TOUS LES PLATS</a>
+                            <a class="nav-link" href="{{ path('app_plats') }}">TOUS LES PLATS</a>
                         </li>
                         <li class="nav-item">
-                                    <a class="nav-link" aria-current="page" href="categories.php">CATéGORIES</a>
+                                    <a class="nav-link" aria-current="page" href="{{ path('app_categories') }}">CATéGORIES</a>
                                 </li>
                                 
                     </ul>
@@ -53,8 +53,11 @@
 
         {% block body %}{% endblock %}
 <div class="floating-cart">
-  <a href="contact.php" class="cart-link">
-    <i class="fas fa-shopping-cart"></i>
+    <a href="{{ path('app_panier') }}" class="cart-link">
+        <i class="fas fa-shopping-cart"></i>
+        <span id="cart-counter" class="cart-counter">0</span>
+    </a>
+</div>
     
   </a>
 </div>

@@ -15,16 +15,20 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@babel/preset-react": "^7.26.3",
     "@symfony/webpack-encore": "^5.0.1",
     "css-loader": "^7.1.2",
     "file-loader": "^6.2.0",
     "image-webpack-loader": "^8.1.0",
     "mini-css-extract-plugin": "^2.9.2",
+    "postcss-loader": "^8.1.1",
     "sass": "^1.83.4",
     "sass-loader": "^16.0.4",
     "url-loader": "^4.1.1"
   },
   "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
     "stimulus": "^3.2.2"
   }
 }

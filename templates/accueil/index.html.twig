@@ -26,6 +26,7 @@
                         </button>
                         <div class="collapse navbar-collapse" id="navbarSupportedContent">
                             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                                <li class="nav-item"><a class="nav-link active" aria-current="page" href="{{ path('app_login') }}"><i class="fa-solid fa-user"></i></a></li>
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page" href="#">HOME</a>
                                 </li>
@@ -80,13 +81,14 @@
                     <div class="col-4 d-flex">
                         <!-- Карточка занимает 1/4 ширины -->
                         <div class="card flex-grow-1">
-                            <!-- Карточка растягивается на всё доступное пространство -->
+                            <a href="{{ path('api_categorie_plats', { id: activecat.id }) }}">
                             <img src="{{ asset('build/images/' ~ activecat.image) }}" 
                                  alt="{{ activecat.libelle }}" 
                                  class="card-img-top category-image">
                             <div class="card-body text-center">
                                 <p class="category-name">{{ activecat.libelle }}</p>
                             </div>
+                            </a>
                         </div>
                     </div>
                 {% endfor %}

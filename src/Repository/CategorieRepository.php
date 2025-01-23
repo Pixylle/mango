@@ -37,14 +37,16 @@ class CategorieRepository extends ServiceEntityRepository
             // Добавляем поле libelle категории
             ->addSelect('c.libelle')
             // Добавляем поле image категории
-            ->addSelect('c.image') 
+            ->addSelect('c.image')
+            // Добавляем поле id категории
+            ->addSelect('c.id')
             // Суммируем количество для каждой категории через связи с деталями
             ->addSelect('SUM(d.quantite) AS total_quantite') // Суммируем количество
             // Группируем по ID категории
             ->groupBy('c.id')
             // Сортируем по сумме количеств по убыванию
             ->orderBy('total_quantite', 'DESC')
-            // Ограничиваем 6 результатами
+            // Ограничиваем результатами
             ->setMaxResults($limit)
             ->getQuery()
             ->getResult();
