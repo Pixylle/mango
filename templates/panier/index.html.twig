@@ -1,20 +1,28 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PanierController!{% endblock %}
+{% block title %}Votre Panier{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>/home/yubo/Mango/src/Controller/PanierController.php</code></li>
-        <li>Your template at <code>/home/yubo/Mango/templates/panier/index.html.twig</code></li>
-    </ul>
+<div class="container mt-5">
+    <h2 class="text-center mb-4">
+        <i class="fas fa-shopping-cart"></i> Mon Panier
+    </h2>
+    {% if cart is not empty %}
+        {% for item in cart %}
+            <div class="d-flex align-items-center justify-content-between p-3 border-bottom">
+                <img src="{{ asset('build/images/' ~ item.image) }}" alt="{{ item.name }}" style="width: 80px; height: 80px;" class="img-thumbnail">
+                <strong>{{ item.name }}</strong>
+                <span>{{ item.quantity }} x {{ item.price }} €</span>
+                <span>Total: {{ item.quantity * item.price }} €</span>
+            </div>
+        {% endfor %}
+        <div class="text-right mt-4">
+            <h4>Total: {{ cart|reduce((acc, item) => acc + item.quantity * item.price, 0) }} €</h4>
+            <a href="/checkout" class="btn btn-primary">Passer à la caisse</a>
+        </div>
+    {% else %}
+        <p class="text-center">Votre panier est vide.</p>
+    {% endif %}
 </div>
+
 {% endblock %}

@@ -31,7 +31,7 @@
                                     <a class="nav-link" aria-current="page" href="#">HOME</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ path('app_plats') }}">TOUS LES PLATS</a>
+                                    <a class="nav-link" href="{{ path('app_plat') }}">TOUS LES PLATS</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" aria-current="page" href="{{ path('app_categories') }}">CATéGORIES</a>
@@ -81,7 +81,7 @@
                     <div class="col-4 d-flex">
                         <!-- Карточка занимает 1/4 ширины -->
                         <div class="card flex-grow-1">
-                            <a href="{{ path('api_categorie_plats', { id: activecat.id }) }}">
+                            <a href="{{ path('app_platcat', { id: activecat.id }) }}">
                             <img src="{{ asset('build/images/' ~ activecat.image) }}" 
                                  alt="{{ activecat.libelle }}" 
                                  class="card-img-top category-image">

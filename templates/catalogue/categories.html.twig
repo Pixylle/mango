@@ -21,7 +21,7 @@
             {% if categories is not empty %}
                 {% for categorie in categories %}
                     <div class="col-3 cath">
-                     <a href="{{ path('api_categorie_plats', { id: categorie.id }) }}">
+                     <a href="{{ path('app_platcat', { id: categorie.id }) }}">
                             <p class="category-name">{{ categorie.libelle }}</p>
                             <img src="{{ asset('build/images/' ~ categorie.image) }}" alt="{{ categorie.libelle }}" class="category-image">
                         </a>
