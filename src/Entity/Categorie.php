@@ -6,6 +6,7 @@ use App\Repository\CategorieRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CategorieRepository::class)]
 class Categorie
@@ -13,21 +14,25 @@ class Categorie
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['categorie:read', 'plat:read'])] // Разрешаем ID в JSON
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['categorie:read', 'plat:read'])] // Название категории
     private ?string $libelle = null;
 
     /**
      * @var Collection<int, Plat>
      */
     #[ORM\OneToMany(targetEntity: Plat::class, mappedBy: 'categorie', orphanRemoval: true)]
-    private Collection $plats;
+    private Collection $plats; // ❌ УБИРАЕМ ИЗ JSON, ЧТОБЫ НЕ БЫЛО ЗАЦИКЛИВАНИЯ!
 
     #[ORM\Column(length: 255)]
+    #[Groups(['categorie:read'])] // Показываем изображение категории
     private ?string $image = null;
 
     #[ORM\Column]
+    #[Groups(['categorie:read'])] // Показываем активность категории
     private ?bool $active = null;
 
     public function __construct()
@@ -40,15 +45,14 @@ class Categorie
         return $this->id;
     }
 
-    public function getlibelle(): ?string
+    public function getLibelle(): ?string
     {
         return $this->libelle;
     }
 
-    public function setlibelle(string $libelle): static
+    public function setLibelle(string $libelle): static
     {
         $this->libelle = $libelle;
-
         return $this;
     }
 
@@ -66,19 +70,16 @@ class Categorie
             $this->plats->add($plat);
             $plat->setCategorie($this);
         }
-
         return $this;
     }
 
     public function removePlat(Plat $plat): static
     {
         if ($this->plats->removeElement($plat)) {
-            // set the owning side to null (unless already changed)
             if ($plat->getCategorie() === $this) {
                 $plat->setCategorie(null);
             }
         }
-
         return $this;
     }
 
@@ -90,13 +91,14 @@ class Categorie
     public function setImage(string $image): static
     {
         $this->image = $image;
-
         return $this;
     }
+
     public function isActive(): bool
     {
         return $this->active;
     }
+
     public function setActive(bool $active): self
     {
         $this->active = $active;

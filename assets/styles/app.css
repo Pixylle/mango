@@ -850,7 +850,7 @@ footer {
 
 .menu-section {
   margin: 30px auto;
-  min-height: calc(100vh - 100px); /* Учитываем высоту футера */
+ /*  min-height: calc(100vh - 100px); Учитываем высоту футера */
   display: flex;
   flex-direction: column;
   justify-content: space-between;

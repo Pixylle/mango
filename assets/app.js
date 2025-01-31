@@ -1,5 +1,12 @@
-import './styles/app.css';
+// app.js
+import './styles/app.css'; // Импорт стилей
+import React from 'react';
+import { createRoot } from "react-dom/client"; // Используем createRoot из react-dom/client
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'; // Импорт React Router
+import App from './categoriesApp'; // Импорт React-компонента с категориями
+import PlatCat from './platscat'; // Импорт компонента для отображения блюд по категории
 
+// Код для обработки кнопок корзины
 document.addEventListener('DOMContentLoaded', () => {
     const buttons = document.querySelectorAll('.add-to-cart-btn');
     buttons.forEach(button => {
@@ -7,8 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const platId = button.getAttribute('data-id');
             const quantityInput = document.getElementById(`quantity-${platId}`);
             const quantity = quantityInput ? quantityInput.value : 1;
-
-            console.log(`Отправляю запрос для блюда ID: ${platId}, количество: ${quantity}`);
 
             fetch(`/panier/add/ajax/${platId}`, {
                 method: 'POST',
@@ -37,3 +42,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+// Основной компонент с маршрутизатором
+const Root = () => {
+    return (
+        <Router>
+            <Routes>
+                {/* Главная страница */}
+                <Route path="/" element={<App />} />
+
+                {/* Страница с блюдами по категории */}
+                <Route path="/plats/:id" element={<PlatCat />} />
+            </Routes>
+        </Router>
+    );
+};
+
+// Убедитесь, что элемент с id="root" существует
+const rootElement = document.getElementById('root');
+if (rootElement) {
+    const root = createRoot(rootElement);
+    root.render(<Root />);
+} else {
+    console.error("Element with id 'root' not found");
+}

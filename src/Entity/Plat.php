@@ -6,6 +6,7 @@ use App\Repository\PlatRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: PlatRepository::class)]
 class Plat
@@ -13,13 +14,16 @@ class Plat
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['plat:read'])] // Разрешаем ID в JSON
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['plat:read'])] // Название блюда в JSON
     private ?string $title = null;
 
     #[ORM\ManyToOne(inversedBy: 'plats')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['plat:read'])] // Показываем категорию, но не её блюда
     private ?Categorie $categorie = null;
 
     /**
@@ -29,16 +33,17 @@ class Plat
     private Collection $details;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['plat:read'])] // Показываем картинку в JSON
     private ?string $image = null;
 
     #[ORM\Column]
+    #[Groups(['plat:read'])] // Показываем цену
     private ?float $prix = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['plat:read'])] // Показываем описание блюда
     private ?string $description = null;
 
-
-    
     public function __construct()
     {
         $this->details = new ArrayCollection();
@@ -139,3 +144,4 @@ class Plat
         return $this;
     }
 }
+
