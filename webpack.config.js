@@ -7,6 +7,8 @@ Encore
     .setPublicPath('/build')
     // Добавляем основной файл приложения
     .addEntry('app', './assets/app.js')
+    .addEntry('card', './assets/card.js')  // Добавляем card.js
+    .addEntry('platscat', './assets/platscat.jsx')  
     // Включаем поддержку React
     .enableReactPreset()
     // Включаем поддержку Sass

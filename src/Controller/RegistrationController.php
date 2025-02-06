@@ -17,6 +17,8 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Contracts\Translation\TranslatorInterface;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 
 class RegistrationController extends AbstractController
 {
@@ -30,6 +32,7 @@ class RegistrationController extends AbstractController
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
+        
 
         if ($form->isSubmitted() && $form->isValid()) {
             /** @var string $plainPassword */
@@ -37,18 +40,24 @@ class RegistrationController extends AbstractController
 
             // encode the plain password
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
-
+            $user->setRoles(['ROLE_CLIENT']);
             $entityManager->persist($user);
             $entityManager->flush();
 
-            // generate a signed url and email it to the user
+           
+            
+            dump('Отправка письма началась');
             $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
                 (new TemplatedEmail())
                     ->from(new Address('mailer@mangorest.com', 'Mango Chef'))
-                    ->to((string) $user->getEmail())
+                    ->to($user->getEmail())
                     ->subject('Please Confirm your Email')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
+            dump('Письмо успешно отправлено!');
+            exit;
+            
+            
 
             // do anything else you need here, like send an email
 

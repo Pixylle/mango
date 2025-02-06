@@ -3,26 +3,33 @@
 {% block title %}Votre Panier{% endblock %}
 
 {% block body %}
-<div class="container mt-5">
-    <h2 class="text-center mb-4">
+<div class="cart-container">
+    <h2 class="cart-title">
         <i class="fas fa-shopping-cart"></i> Mon Panier
     </h2>
+
     {% if cart is not empty %}
-        {% for item in cart %}
-            <div class="d-flex align-items-center justify-content-between p-3 border-bottom">
-                <img src="{{ asset('build/images/' ~ item.image) }}" alt="{{ item.name }}" style="width: 80px; height: 80px;" class="img-thumbnail">
-                <strong>{{ item.name }}</strong>
-                <span>{{ item.quantity }} x {{ item.price }} €</span>
-                <span>Total: {{ item.quantity * item.price }} €</span>
-            </div>
-        {% endfor %}
-        <div class="text-right mt-4">
+        <div class="cart-items">
+            {% for item in cart %}
+                <div class="cart-item">
+                    <img src="{{ asset('build/images/' ~ item.image) }}" alt="{{ item.name }}">
+                    <span class="cart-item-name">{{ item.name }}</span>
+                    <span class="cart-item-quantity">{{ item.quantity }} x {{ item.price }} €</span>
+                    <span class="cart-item-total">Total: {{ item.quantity * item.price }} €</span>
+                    <button class="remove-item ms-3" data-id="{{ item.id }}">✖</button>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="cart-footer">
             <h4>Total: {{ cart|reduce((acc, item) => acc + item.quantity * item.price, 0) }} €</h4>
-            <a href="/checkout" class="btn btn-primary">Passer à la caisse</a>
+            <div class="cart-actions">
+                <button class="clear-cart vider-panier">Vider le panier</button>
+                <a href="{{ path('app_commande') }} " class="checkout-btn">Commander</a>
+            </div>
         </div>
     {% else %}
-        <p class="text-center">Votre panier est vide.</p>
+        <p class="cart-empty-message">Votre panier est vide.</p>
     {% endif %}
 </div>
-
 {% endblock %}

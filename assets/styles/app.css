@@ -778,12 +778,9 @@ a #add:hover{
 
 
 a:hover {
-  color:#000000;
+  color:#ffffff;
 }
 
-.custom-card-btn {
-  color: white;
-}
 /*новые карточки товара */
 body {
   margin: 0;
@@ -1167,4 +1164,111 @@ footer {
     max-width: 300px;
     margin: 0 auto;
     display: block;
+}
+
+/* Основной контейнер корзины */
+.cart-container {
+  max-width: 500px;
+  margin: 20px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+/* Заголовок корзины */
+.cart-title {
+  font-size: 22px;
+  margin-bottom: 15px;
+}
+
+/* Список товаров */
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Каждый товар */
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* Изображения товаров */
+.cart-item img {
+  width: 50px;
+  height: 50px;
+  border-radius: 5px;
+}
+
+/* Название товара */
+.cart-item-name {
+  flex: 1;
+  text-align: left;
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+/* Количество и цена */
+.cart-item-quantity, .cart-item-total {
+  font-size: 14px;
+  color: #333;
+}
+
+/* Кнопка удаления товара */
+.remove-item {
+  background: red;
+  color: white;
+  border: none;
+  padding: 5px 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Подвал корзины */
+.cart-footer {
+  margin-top: 15px;
+}
+
+/* Блок с кнопками */
+.cart-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Кнопки */
+.clear-cart, .checkout-btn {
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.clear-cart {
+  background: #dc3545;
+}
+
+.checkout-btn {
+  background: #28a745;
+}
+
+
+.add-new-plat-btn {
+  display: inline-block; /* Делаем кнопку по размеру контента */
+  width: auto; /* Чтобы не растягивалась */
+  height: auto; /* Убираем растяжение по высоте */
+  padding: 10px 15px; /* Отступы, чтобы выглядело нормально */
+  margin: 20px auto; /* Центрируем */
 }

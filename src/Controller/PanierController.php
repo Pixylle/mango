@@ -61,4 +61,27 @@ public function index(SessionInterface $session, \Doctrine\ORM\EntityManagerInte
         // Возвращаем JSON-ответ
         return new JsonResponse(['success' => true, 'totalItems' => $totalItems]);
     }
+
+    #[Route('/panier/remove/{id}', name: 'cart_remove', methods: ['POST'])]
+   
+public function removeItem(int $id, SessionInterface $session): JsonResponse
+{
+    $cart = $session->get('cart', []);
+    
+    if (isset($cart[$id])) {
+        unset($cart[$id]);
+        $session->set('cart', $cart);
+    }
+
+    return $this->json(['success' => true]);
+}
+
+#[Route('/panier/clear', name: 'cart_clear', methods: ['POST'])]
+
+public function clearCart(SessionInterface $session): JsonResponse
+{
+    $session->set('cart', []);
+    return $this->json(['success' => true]);
+}
+
 }

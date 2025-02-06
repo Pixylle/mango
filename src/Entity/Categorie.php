@@ -12,10 +12,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
 class Categorie
 {
     #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    #[Groups(['categorie:read', 'plat:read'])] // Разрешаем ID в JSON
+   #[ORM\Column]
+   #[ORM\GeneratedValue(strategy: "NONE")] // ОТКЛЮЧАЕМ автоинкремент
     private ?int $id = null;
+
 
     #[ORM\Column(length: 255)]
     #[Groups(['categorie:read', 'plat:read'])] // Название категории

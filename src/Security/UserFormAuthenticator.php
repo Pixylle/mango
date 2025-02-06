@@ -25,7 +25,7 @@ class UserFormAuthenticator extends AbstractLoginFormAuthenticator
     public function __construct(private UrlGeneratorInterface $urlGenerator)
     {
     }
-
+/*
     public function authenticate(Request $request): Passport
     {
         $email = $request->getPayload()->getString('email');
@@ -41,6 +41,42 @@ class UserFormAuthenticator extends AbstractLoginFormAuthenticator
             ]
         );
     }
+*/
+
+public function authenticate(Request $request): Passport
+{
+    // Détection automatique du type d'entrée
+    if ($request->getContentTypeFormat() === 'json') {
+        $payload = $request->getPayload();
+        $email = $payload->getString('email');
+        $password = $payload->getString('password');
+        $csrfToken = $payload->getString('_csrf_token');
+    } else {
+        $email = $request->request->get('email');
+        $password = $request->request->get('password');
+        $csrfToken = $request->request->get('_csrf_token');
+    }
+
+    if (!$email || !$password || !$csrfToken) {
+        throw new BadRequestHttpException('Missing authentication data.');
+    }
+
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        throw new InvalidArgumentException('Invalid email format.');
+    }
+
+    $request->getSession()->set(SecurityRequestAttributes::LAST_USERNAME, $email);
+
+    return new Passport(
+        new UserBadge($email),
+        new PasswordCredentials($password),
+        [
+            new CsrfTokenBadge('authenticate', $csrfToken),
+            new RememberMeBadge(),
+        ]
+    );
+}
+
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, string $firewallName): ?Response
     {
@@ -50,7 +86,8 @@ class UserFormAuthenticator extends AbstractLoginFormAuthenticator
 
         // For example:
         // return new RedirectResponse($this->urlGenerator->generate('some_route'));
-        throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+        return new RedirectResponse($this->urlGenerator->generate('app_accueil'));
     }
 
     protected function getLoginUrl(Request $request): string

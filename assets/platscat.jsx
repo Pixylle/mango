@@ -55,13 +55,15 @@ const PlatCat = () => {
                             <p className="custom-card-description">{plat.description}</p>
                             <p className="custom-card-price">{plat.prix} €</p>
                             <div className="custom-card-footer">
-                                <input type="number" name="quantite" min="1" defaultValue="1" className="custom-card-quantity" />
+                            <input type="number" name="quantite" min="1" defaultValue="1" className="custom-card-quantity" id={`quantity-${plat.id}`} />
+
                                 <input type="hidden" name="id" value={plat.id} />
                                 <input type="hidden" name="title" value={plat.title} />
                                 <input type="hidden" name="prix" value={plat.prix} />
                                 <input type="hidden" name="id_categorie" value={plat.categorie?.id || ''} />
                                 <input type="hidden" name="image" value={plat.image} />
-                                <button type="submit" name="action" value="buy_now" className="custom-card-btn">
+                                <button type="button" className="custom-card-btn add-to-cart-btn" data-id={plat.id}>
+
                                     <i className="fa fa-shopping-cart"></i> Acheter
                                 </button>
                             </div>
